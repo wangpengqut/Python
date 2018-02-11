@@ -1,0 +1,103 @@
+01 如何去掉list中重复元素
+my_list = [3,2,1,1,2,3]
+print(my_list)
+
+unique_list = list(set(my_list))
+print(unique_list)
+
+#前一种方式不会保留list的元素顺序，后一种方式会保留list的元素顺序
+from collections import OrderedDict
+
+my_list = [3,2,1,1,2,3]
+print(my_list)
+
+unique_list = list(OrderedDict.fromkeys(my_list))
+print(unique_list)print(unique_list)
+
+02 如何读取dict中的值
+url_dict = {'google':'https://www.google.com',
+'github':'https://github.com',
+'facebook':'https://www.facebook.com'}
+
+print(url_dict['facebook'])
+print(url_dict['github'])
+print(url_dict['google'])
+
+#后一种方式使用字典的get方法，如果key不存在，不会产生KeyError，如果给了默认值，会返回默认值，否则返回None。
+url_dict = {'google':'https://www.google.com',
+'github':'https://github.com',
+'facebook':'https://www.facebook.com'}
+
+print(url_dict.get('facebook','https://www.facebook.com'))
+print(url_dict.get('github','https://github.com'))
+print(url_dict.get('google','https://www.google.com'))
+
+03 如何排序字典
+#第一种方式是按字典的value升序排序，第二种方式是按字典的key升序排序，第三种方式是按字典的value降序排序，
+#和第一种方式相反，因为指定了参数reverse为True。sorted函数功能挺强大，不止可以排序字典，任何iterable对象都可以排序。
+unordered_dict = {'c':1,'b':2,'a':3}
+
+print(sorted(unordered_dict.items(),key=lambda e: e[1]))
+
+print(sorted(unordered_dict.items(),key=lambda e: e[0]))
+
+print(sorted(unordered_dict.items(),key=lambda e: e[1], reverse=True))
+
+04 如何打印更易读的类
+class Point(object):
+def init(self,x,y):
+self.x = x
+self.y = y
+
+p = Point(3,4)
+print(p)
+
+#前一种方式打印的类不易读，不能获取更多的信息。通过类的repr方法可以将类打印得更易读。
+#或者不定义repr方法，直接使用下面方式打印：
+#print p.dict# {'y': 4, 'x': 3}
+#使用dict方法，将类以字典形式打印出来，也比较易读。
+class Point(object):
+def init(self,x,y):
+self.x = x
+self.y = y
+
+def __repr__(self):
+    return 'Point({self.x},{self.y})'.format(self=self)
+p = Point(3,4)
+print(p)
+
+05 如何将类打印成json字符串
+#通过json模块的dumps方法，可以轻易将类打印成json字符串。
+import json
+
+class User(object):
+def init(self,name,id):
+self.name = name
+self.id = id
+
+u = User('user1',1)
+print(json.(u.dict,indent=4))
+
+#06 如何排序类列表
+class User:
+def init(self,name,key):
+self.name = name
+self.key = key
+
+def __repr__(self):
+    return 'User({self.name},{self.key})'.format(self=self)
+user_list = [User('user1',3),
+User('user2',2),
+User('user3',1),]
+
+print(sorted(user_list,key=lambda user:user.key))
+
+print(sorted(user_list,key=lambda user:user.name))
+
+#这里排序的方法和字典排序类似，第一种是按user的key升序排序，
+#第二种是按user的name升序排序。其实还支持名字相同，再按key进行排序，如下：
+user_list = [User('user1',3),
+User('user1',2),
+User('user2',1),]
+
+print(sorted(user_list,key=lambda user:(user.name, user.key)))
