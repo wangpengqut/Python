@@ -1,0 +1,35 @@
+pip install delorean
+
+# Without delorean
+from datetime import datetime
+import pytz
+
+est = pytz.timezone('US/Eastern')
+d = datetime.now(pytz.utc)
+d = est.normalize(d.astimezone(est))
+return d
+
+# with delorean
+from delorean import Delorean
+
+d = Delorean()
+d = d.shift('US/Eastern')
+return d
+
+d.next_day(1)
+#
+d.next_day(-2)
+#
+d.next_tuesday()
+#
+d.next_friday()
+#
+d.last_sunday()
+#
+
+
+from delorean import stops
+import delorean
+for stop in stops(freq=delorean.HOURLY, count=10)
+    print(stop)
+#
