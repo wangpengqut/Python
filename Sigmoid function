@@ -1,3 +1,4 @@
+#Sigmoid fuction
 import math
 
 def basic_sigmoid(x):
@@ -19,3 +20,10 @@ def sigmoid(x):
 
 y = np.array([7,8,9])
 sigmoid(y)
+
+#Sigmoid gradient
+def sigmoid_derivative(x):
+    #x-a scalar or numpy array
+    s = 1/(1+np.exp(-x))
+    ds = s*(1-s)
+    return ds
