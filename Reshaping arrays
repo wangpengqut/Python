@@ -1,0 +1,4 @@
+def image2vector(image):
+    #image -- a numpy array of shape (length, height, depth)
+    #return v -- a vector of shape (length*height*depth,1)
+    v = image.reshape()
