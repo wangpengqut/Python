@@ -1,0 +1,15 @@
+import numpy as np
+def normalizeRows(x):
+    """
+    Implement a function that normalizes each row of the matrix x
+    (to have unit length)
+    """
+    x_norm = np.linalg.norm(x,axis=1,keepdims=True)
+    x = x/x_norm
+    return x
+
+x = np.array([[0,3,4],[1,6,4]])
+print('normalizeRows(x)= ' + str(normalizeRows(x)))
+
+#normalizeRows(x)= [[0.         0.6        0.8       ]
+ [0.13736056 0.82416338 0.54944226]]
