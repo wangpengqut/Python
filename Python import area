@@ -1,0 +1,78 @@
+#Inner model: C:Python35lib
+#The last output is the path
+import sys
+for n in sys.path:
+    print(n)
+    
+#Outter models: C:Python35libsite-packages
+import sys
+from sys import path
+path
+#C:\Users\...\Anaconda3\envs\tensorflow\lib\site-packages
+
+
+def _getframe(depth=None): # real signature unknown; restored from __doc__
+
+    """
+
+    _getframe([depth]) -> frameobject
+
+    
+
+    Return a frame object from the call stack.  If optional integer depth is
+
+    given, return the frame object that many calls below the top of the stack.
+
+    If that is deeper than the call stack, ValueError is raised.  The default
+
+    for depth is zero, returning the frame at the top of the call stack.
+
+    
+
+    This function should be used for internal and specialized
+
+    purposes only.
+
+    """
+
+    pass
+help(sys._getframe())
+#return below
+Help on frame object:
+
+class frame(object)
+ |  Methods defined here:
+ |  
+ |  __delattr__(self, name, /)
+ |      Implement delattr(self, name).
+ |  
+ |  __getattribute__(self, name, /)
+ |      Return getattr(self, name).
+ |  
+ |  __setattr__(self, name, value, /)
+ |      Implement setattr(self, name, value).
+ |  
+ |  __sizeof__(...)
+ |      F.__sizeof__() -> size of F in memory, in bytes
+ |  
+ |  clear(...)
+ |      F.clear(): clear most references held by the frame
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  f_back
+ |  
+ |  f_builtins
+ |  
+ |  f_code
+ |  
+ |  f_globals
+ |  
+ |  f_lasti
+ |  
+ |  f_lineno
+ |  
+ |  f_locals
+ |  
+ |  f_trace
