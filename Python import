@@ -1,0 +1,11 @@
+#Inner model: C:Python35lib
+#The last output is the path
+import sys
+for n in sys.path:
+    print(n)
+    
+#Outter models: C:Python35libsite-packages
+import sys
+from sys import path
+path
+#C:\Users\...\Anaconda3\envs\tensorflow\lib\site-packages
