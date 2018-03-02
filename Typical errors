@@ -1,0 +1,121 @@
+#01 mutable
+def f(lst = []):
+  lst.append(1)
+  return lst
+## [1, 1]
+#Default parameter values are evaluated when the function definition is executed.
+#Another example
+import time
+def report(when=time.time()):
+    return when
+#A way around this is to use None as the default, and explicitly test for it in the body of the function
+def report(when=None):
+    if when is None:
+        when = time.time()
+    return when
+
+#02 x += y vs x = x + y
+x=1;x += 1;print x
+x=1;x = x+1;print x
+x=[1];x+=[2];print x
+# [1, 2]
+x=[1];x=x+[2];print x
+#[1, 2]
+
+#BUT
+x=[1];print id(x);x=x+[2];print id(x) 
+#4357132800
+#4357132728
+x=[1];print id(x);x+=[2];print id(x)
+#4357132800
+#4357132800
+
+#03 little ()
+a = (1, 2)
+type(a)
+<type 'tuple'>
+type(())
+<type 'tuple'>
+# only one element
+a=(1)
+type(a)
+<type 'int'>
+#so the right def is
+a=(1)
+type(a)
+<type 'int'>
+
+#04
+>>> a= [[]] * 10
+
+>>> a
+
+[[], [], [], [], [], [], [], [], [], []]
+
+>>> a[0].append(10)
+
+>>> a[0] 
+
+[10]
+
+#BUT
+>>> a[1]
+
+[10]
+
+>>> a
+
+[[10], [10], [10], [10], [10], [10], [10], [10], [10], [10]]
+
+# The correct one
+>>> a = [[] for _ in xrange(10)]
+
+>>> a[0].append(10)
+
+>>> a
+
+[[10], [], [], [], [], [], [], [], [], []]
+
+#05 
+>>> def modify_lst(lst):
+
+... for idx, elem in enumerate(lst):
+
+... if elem % 3 == 0:
+
+... del lst[idx]
+
+>>> lst = [1,2,3,4,5,6]
+
+>>> modify_lst(lst)
+
+>>> lst
+
+[1, 2, 4, 5]
+
+#BUT
+>>> lst = [1,2,3,6,5,4]
+
+>>> modify_lst(lst)
+
+>>> lst
+
+[1, 2, 6, 5, 4]
+
+#06 lambda
+>>> def create_multipliers():
+...  return [lambda x:i*x for i in range(5)]
+...
+
+>>> for multiplier in create_multipliers():
+... print multiplier(2)
+
+>>> def create_multipliers():
+
+... return [lambda x, i = i:i*x for i in range(5)]
+
+#07 __del__
+#Circular references which are garbage are detected when the option cycle detector is enabled (it’s on by default), 
+#but can only be cleaned up if there are no Python-level __del__() methods involved.
+
+
