@@ -1,0 +1,79 @@
+$ memcached
+
+from pymemcache.client import base
+
+# Don't forget to run `memcached' before running this next line:
+client = base.Client(('localhost', 11211))
+
+# Once the client is instantiated, you can access the cache:
+client.set('some_key', 'some value')
+
+# Retrieve previously set data again:
+client.get('some_key')
+'some value'
+
+from pymemcache.client import base
+
+
+def do_some_query():
+    # Replace with actual querying code to a database,
+    # a remote REST API, etc.
+    return 42
+
+
+# Don't forget to run `memcached' before running this code
+client = base.Client(('localhost', 11211))
+result = client.get('some_key')
+
+if result is None:
+    # The cache is empty, need to get the value
+    # from the canonical source:
+    result = do_some_query()
+
+    # Cache the result for next time:
+    client.set('some_key', result)
+
+# Whether we needed to update the cache or not,
+# at this point you can work with the data
+# stored in the `result` variable:
+print(result)
+
+from pymemcache.client import base
+from pymemcache import fallback
+
+
+def do_some_query():
+    # Replace with actual querying code to a database,
+    # a remote REST API, etc.
+    return 42
+
+
+# Set `ignore_exc=True` so it is possible to shut down
+# the old cache before removing its usage from 
+# the program, if ever necessary.
+old_cache = base.Client(('localhost', 11211), ignore_exc=True)
+new_cache = base.Client(('localhost', 11212))
+
+client = fallback.FallbackClient((new_cache, old_cache))
+
+result = client.get('some_key')
+
+if result is None:
+    # The cache is empty, need to get the value 
+    # from the canonical source:
+    result = do_some_query()
+
+    # Cache the result for next time:
+    client.set('some_key', result)
+
+print(result)
+
+def on_visit(client):
+    while True:
+        result, cas = client.gets('visitors')
+        if result is None:
+            result = 1
+        else:
+            result += 1
+        if client.cas('visitors', result, cas):
+            break
