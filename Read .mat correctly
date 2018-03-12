@@ -1,0 +1,18 @@
+from numpy import *
+import scipy.io
+
+mnist_train = 'D:\Machine Learning\TensorFlow\Softmax Regression\mnist_dataset\mnist_train.mat'
+mnist_train_labels = 'D:\Machine Learning\TensorFlow\Softmax Regression\mnist_dataset\mnist_train_labels.mat'
+
+x = scipy.io.loadmat(mnist_train)
+label = scipy.io.loadmat(mnist_train_labels)
+
+print(x.shape)
+
+#可见，如果本地mat文件包含了额外的信息，则单纯使用scipy.io.loadmat()无法直接读取到所需数据，还应该补充一行对应的代码。
+x = scipy.io.loadmat(mnist_train)
+train_x = x['mnist_train']
+label = scipy.io.loadmat(mnist_train_labels)
+train_label = label['mnist_train_labels']
+
+
