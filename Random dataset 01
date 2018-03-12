@@ -1,0 +1,53 @@
+import random
+
+def create_dataset(hm, variance, step=2, correlation=False):
+    val = 1
+    ys = []
+    for i in range(hm):
+        y = val + random.randrange(-variance, variance)
+        ys.append(y)
+        if correlation and correlation =='pos':
+            val += step
+        elif correlation and correlation =='neg':
+            val -= step
+    xs = [i for i in range(len(ys))]
+    return np.array(xs, dtype=np.float64),np.array(ys, dtype=np.float64)
+
+
+xs3,ys3 =create_dataset(40, 10, step=2, correlation='pos')
+#variance decrease r2 increase
+m3,b3 = best_fit_slope_and_intercept(xs3,ys3)
+print(m3,b3)
+
+regression_line3 = [(m3*x3)+b3 for x3 in xs3]
+predict_x3 = 8
+predict_y3 =(m3*predict_x3)+b3
+plt.scatter(xs3,ys3)
+plt.scatter(predict_x3,predict_y3,s=100,c='g')
+plt.plot(xs3,regression_line3)
+#plt.savefig('E:/.../2D_1.png', dpi=300)
+plt.show()
+
+r_squared3 = coefficient_of_determination(ys3,regression_line3)
+print(r_squared3)
+
+# Test code below
+xss=[]
+yss=[]
+r_squareds = []
+regression_lines=[]
+for x in range(1,50):
+    xs,ys=create_dataset(40, x, step=2, correlation='pos')
+    xss=xss.append(xs)
+    yss=yss.append(xs)
+    ms,bs = best_fit_slope_and_intercept(xs,ys)
+    regression_line = [(ms*x)+bs]
+    regression_lines=regression_lines.append(regression_line)
+    r_squared = coefficient_of_determination(ys,regression_lines)
+    r_squareds = r_squareds.append(r_squared )
+
+plt.scatter(xss,r_squareds)
+#plt.savefig('E:/.../2D_1.png', dpi=300)
+plt.show()
+
+
