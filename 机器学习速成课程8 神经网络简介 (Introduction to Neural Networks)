@@ -1,0 +1,62 @@
+import math
+
+from IPython import display
+from matplotlib import cm
+from matplotlib import gridspec
+from matplotlib import pyplot as plt
+import numpy as np
+import pandas as pd
+from sklearn import metrics
+import tensorflow as tf
+from tensorflow.python.data import Dataset
+
+tf.logging.set_verbosity(tf.logging.ERROR)
+pd.options.display.max_rows = 10
+pd.options.display.float_format = '{:.1f}'.format
+
+import pandas as pd
+df = pd.read_csv("C:/.../MEW FiberDiameter 21_4.csv")
+df.head()
+
+# Choose the first 150 (out of 234) examples for training.
+training_examples = preprocess_features(df.head(150))
+training_targets = preprocess_targets(df.head(150))
+
+# Choose the last 70 (out of 234) examples for validation.
+validation_examples = preprocess_features(df.tail(70))
+validation_targets = preprocess_targets(df.tail(70))
+
+# Double-check that we've done the right thing.
+print("Training examples summary:") 
+display.display(training_examples.describe())
+print("Validation examples summary:") 
+display.display(validation_examples.describe())
+
+print("Training targets summary:") 
+display.display(training_targets.describe())
+print("Validation targets summary:") 
+display.display(validation_targets.describe())
+
+dnn_regressor = train_nn_regression_model(
+    learning_rate=0.01,
+    steps=500,
+    batch_size=10,
+    hidden_units=[10, 2],
+    training_examples=training_examples,
+    training_targets=training_targets,
+    validation_examples=validation_examples,
+    validation_targets=validation_targets)
+
+dnn_regressor = train_nn_regression_model(
+    learning_rate=0.001,
+    steps=2000,
+    batch_size=10,
+    hidden_units=[10, 10],
+    training_examples=training_examples,
+    training_targets=training_targets,
+    validation_examples=validation_examples,
+    validation_targets=validation_targets)
+
+
+
+
