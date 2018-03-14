@@ -1,0 +1,9 @@
+{f: i for f,i in zip(input,range(len(input)))}
+
+dict(zip(input,range(len(input))))
+
+list(enumerate(input))
+
+dict(enumerate(input))
+
+{f:i for f,i in enumerate(input)}
