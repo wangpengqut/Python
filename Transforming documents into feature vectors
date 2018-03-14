@@ -9,3 +9,9 @@ docs = np.array([
 bag = count.fit_transform(docs)
 
 print(count.vocabulary_)
+#{'one': 2, 'sweet': 5, 'weather': 8, 'shining': 3, 'the': 6, 'is': 1, 'sun': 4, 'and': 0, 'two': 7}
+
+print(bag.toarray())
+#[[0 1 0 1 1 0 1 0 0]
+ [0 1 0 0 0 1 1 0 1]
+ [2 3 2 1 1 1 2 1 1]]
