@@ -1,0 +1,46 @@
+import bpy #Imports the Python API
+import mathutils #Imports Blender vector math utilities
+import math #Imports the standard Python math library
+
+#Set up some variables... standard Python rules apply...
+a = 'hello'
+b = ' world!'
+ 
+#Print the addition to the system console
+print (a+b)
+ 
+#open the system console
+bpy.ops.wm.console_toggle()
+
+import bpy #Imports the Blender Python API
+import mathutils #Imports Blender vector math utilities
+import math #Imports the standard Python math library
+ 
+# Create a mesh cube in the scene
+bpy.ops.mesh.primitive_cube_add(location=(0.936607, -0.484878, 1.66298))
+
+x = 5
+y = 5
+z = 0
+ 
+# Create a mesh cube in the scene
+bpy.ops.mesh.primitive_cube_add(location=(x, y, z))
+
+for i in range (0, 5):
+ 
+    x = i*3
+    y = 0
+    z = 0
+ 
+    # Create a mesh cube in the scene
+    bpy.ops.mesh.primitive_cube_add(location=(x, y, z))
+
+for i in range (0, 10):
+    for j in range (0, 10):
+ 
+        x = i*3
+        y = j*3
+        z = 0
+ 
+        # Create a mesh cube in the scene
+        bpy.ops.mesh.primitive_cube_add(location=(x, y, z))
