@@ -1,0 +1,54 @@
+s = open('d:/lu/lu.txt','r')
+q = s.read()
+f = q.split('\n')
+x=1
+for i in f:
+    b = open('d:/lu/'+str(x)+'.txt','w')
+    b.write(i)
+    x+=1
+    print x
+s.close
+
+x=1
+result={'xiaobao':[],'ake':[],'suquan':[],'jianning':[],'shuanger':[],'junzhu':[],'fangyi':[],'zengrou':[]}
+while x<=11581:
+    a={'word':[],'count':[]}
+    f=open('d:/lu/'+str(x)+'.txt','r').read()
+    words=list(jieba.cut(f))
+    if u'韦小宝' in words:
+        result['xiaobao'].append(1)
+    else:
+        result['xiaobao'].append(0)
+    if u'阿珂' in words:
+        result['ake'].append(1)
+    else:
+        result['ake'].append(0)
+
+result2={'role':[],'xiaobao':[],'ake':[],'suquan':[],'jianning':[],'shuanger':[],'junzhu':[],'fangyi':[],'zengrou':[]}
+for a in b.columns.values:
+    x=xiaobao=ake=suquan=jianning=shuanger=junzhu=fangyi=zengrou=0
+    while x<=11580:
+        if b.iloc[x][a]==1:
+            if b.iloc[x]['xiaobao']==1:
+                xiaobao+=1
+            if b.iloc[x]['ake']==1:
+                ake+=1
+...
+        x+=1
+    result2['role'].append(a)
+    result2['xiaobao'].append(xiaobao)
+    result2['ake'].append(ake)
+    result2['suquan'].append(suquan)
+    result2['jianning'].append(jianning)
+    result2['shuanger'].append(shuanger)
+    result2['junzhu'].append(junzhu)
+    result2['fangyi'].append(fangyi)
+    result2['zengrou'].append(zengrou)
+o=pd.DataFrame(result2)
+o.to_csv('d:/lu/lu2.csv',mode='w',encoding='UTF-8')
+
+
+
+
+
+
