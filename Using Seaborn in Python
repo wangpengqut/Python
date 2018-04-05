@@ -1,0 +1,24 @@
+
+#import all dependencies
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+import warnings
+warnings.filterwarnings("ignore")
+
+
+#import data
+df = pd.read_csv("C:...X.csv")
+
+vis1 = sns.distplot(df["Internet users"],bins=10)
+
+vis2 = sns.distplot(df["LifeExp2013"],bins=10)
+
+f, ax = plt.subplots(2,2,figsize=(8,4))
+vis1 = sns.distplot(df["Internet users"],bins=10, ax= ax[0][0])
+vis2 = sns.distplot(df["Birth rate"],bins=10, ax=ax[0][1])
+vis3 = sns.distplot(df["LifeExp1960"],bins=10, ax=ax[1][0])
+vis4 = sns.distplot(df["LifeExp2013"],bins=10, ax=ax[1][1])
+f.savefig('subplot.png')
